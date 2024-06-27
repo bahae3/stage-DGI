@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <!-- icon photo -->
+    <link rel="shortcut icon" href="static/dgilogo.png" type="image/x-icon" />
+    <!-- css files -->
+    <link rel="stylesheet" href="static/navbar.css" />
+    <link rel="stylesheet" href="static/home_style.css" />
+
+    <!-- fonts links -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <img
+        src="{{ url_for('static', filename='dgilogo.png') }}"
+        alt="DGI Logo"
+        class="header_left_section"
+      />
+
+      <div class="header_right_section">
+        <a href="{{ url_for('home') }}" class="link_right">Home</a>
+        <a href="{{ url_for('admin') }}" class="link_right">Admin Page</a>
+      </div>
+    </header>
+    <div class="container">
+      <h1>Menu SIMPL TVA:</h1>
+      <ul>
+        <li>
+          <a href="{{ url_for('ecart') }}"
+            >Ecart entre déduction facturée et déduciton déclarée.</a
+          >
+        </li>
+        <li>
+          <a href="{{ url_for('activites') }}">Activités contribuables.</a>
+        </li>
+        <li>
+          <a href="{{ url_for('comparer_credit') }}"
+            >Comparaison crédit VS crédit calculé.</a
+          >
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

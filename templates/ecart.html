@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ecart</title>
+    <!-- icon photo -->
+    <link rel="shortcut icon" href="static/dgilogo.png" type="image/x-icon" />
+    <!-- css files -->
+    <link rel="stylesheet" href="static/navbar.css" />
+    <link rel="stylesheet" href="static/ecart.css" />
+
+    <!-- fonts links -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <img
+        src="{{ url_for('static', filename='dgilogo.png') }}"
+        alt="DGI Logo"
+        class="header_left_section"
+      />
+
+      <div class="header_right_section">
+        <a href="{{ url_for('home') }}" class="link_right">Home</a>
+        <a href="{{ url_for('admin') }}" class="link_right">Admin Page</a>
+      </div>
+    </header>
+    <div class="container-ecart">
+      <form action="{{ url_for('ecart') }}" method="post" class="ecart-form">
+        <label class="annee-label">Année: </label>
+        <input type="number" name="annee" required />
+        <label class="annee-label">Période de dépôt: </label><br />
+        <label class="limit-label">de:</label
+        ><input
+          type="date"
+          name="fromDate"
+          class="limit-input"
+          required
+        /><br />
+        <label class="limit-label">à:</label
+        ><input type="date" name="toDate" class="limit-input" required />
+        <input type="submit" value="Chercher" />
+      </form>
+    </div>
+    <div class="container-ecart-table">
+      {% if all_data|length != 0 %}
+      <table class="fl-table">
+        <thead>
+          <tr>
+            <th>ID Déclaration</th>
+            <th>Num facture</th>
+            <th>Déduction facturée</th>
+            <th>Déduction déclarée</th>
+            <th>Résultat</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for data in all_data %}
+          <tr>
+            <td>{{ data[0] }}</td>
+            <td>{{ data[1] }}</td>
+            <td>{{ data[2] }}</td>
+            <td>{{ data[3] }}</td>
+            <td>{{ data[4] }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+    </div>
+  </body>
+</html>

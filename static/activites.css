@@ -1,0 +1,23 @@
+.arrows {
+  margin: 1rem auto 3rem;
+  width: fit-content;
+  display: flex;
+}
+
+.left-arrow,
+.right-arrow {
+  margin: 0 1rem 1rem;
+  width: fit-content;
+  font-size: 2rem;
+  text-align: center;
+
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.left-arrow:hover,
+.right-arrow:hover {
+  color: grey;
+  cursor: pointer;
+}

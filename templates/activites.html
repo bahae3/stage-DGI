@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comparaison crédit déclaré et crédit calculé</title>
+    <!-- icon photo -->
+    <link rel="shortcut icon" href="static/dgilogo.png" type="image/x-icon" />
+
+    <!-- styles -->
+    <link rel="stylesheet" href="static/ecart.css" />
+    <link rel="stylesheet" href="static/navbar.css" />
+    <link rel="stylesheet" href="static/activites.css" />
+
+    <!-- fonts links -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <img
+        src="{{ url_for('static', filename='dgilogo.png') }}"
+        alt="DGI Logo"
+        class="header_left_section"
+      />
+
+      <div class="header_right_section">
+        <a href="{{ url_for('home') }}" class="link_right">Home</a>
+        <a href="{{ url_for('admin') }}" class="link_right">Admin Page</a>
+      </div>
+    </header>
+    <div class="container-ecart-table">
+      {% if activites|length != 0 %}
+      <table class="fl-table">
+        <thead>
+          <tr>
+            <th>Nom complet</th>
+            <th>ID Activités</th>
+            <th>Declarations</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for data in activites %}
+          <tr class="activite-row">
+            <td>{{ data["NOM_PRENOM_RS"] }}</td>
+            <td>{{ data["ID_ACTIVITE"] }}</td>
+            <td>{{ data["DECLARATIONS"] }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+    </div>
+    <div class="arrows">
+      <button class="left-arrow">⬅</button>
+      <button class="right-arrow">➡</button>
+    </div>
+
+    <script src="static/activites.js"></script>
+  </body>
+</html>
