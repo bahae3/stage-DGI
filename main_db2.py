@@ -138,16 +138,19 @@ def comparer_credit():
     query = """
             SELECT
                 d.ID_DECLARATION,
+                a.ID_FISCAL,
                 d.MNT_CREDIT AS Declared_Credit,
                 SUM(r.MONTANT_TVA_PRORATA) AS Calculated_Credit
             FROM
                 declaration d
             LEFT JOIN
                 releve_deduction_edi r ON d.ID_DECLARATION = r.ID_DECLARATION
+            LEFT JOIN 
+            	adherent a ON d.ID_ADHERENT = a.ID_ADHERENT
             GROUP BY
                 d.ID_DECLARATION, d.MNT_CREDIT
             HAVING
-                Calculated_Credit IS NOT NULL
+                a.ID_FISCAL IS NOT NULL;
         """
 
     cursor.execute(query)
@@ -159,9 +162,10 @@ def comparer_credit():
     for result in results:
         comparison_data.append({
             'ID_DECLARATION': result[0],
-            'Crédit déclaré': float(result[1]),
-            'Crédit calculé': result[2],
-            'Ecart': result[2] - float(result[1])
+            'ID Fiscal': result[1],
+            'Crédit déclaré': float(result[2]),
+            'Crédit calculé': result[3],
+            'Ecart': result[3] - float(result[2])
         })
     # pprint.pprint(comparison_data)
     return render_template("comparaison.html", comparaisons=comparison_data)
