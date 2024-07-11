@@ -1,0 +1,72 @@
+.arrows {
+  margin: 1rem auto 3rem;
+  width: fit-content;
+  display: flex;
+}
+
+.left-arrow,
+.right-arrow {
+  margin: 0 1rem 1rem;
+  width: fit-content;
+  font-size: 2rem;
+  text-align: center;
+
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.left-arrow:hover,
+.right-arrow:hover {
+  color: grey;
+  cursor: pointer;
+}
+
+/* Style for buttons in comparaison file */
+  .button-container {
+    text-align: center;
+    margin-bottom: 20px; /* Adjust margin as needed */
+  }
+  
+  .filter-button {
+    font-family: "PT Serif", serif;
+    background-color: #114388;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 10px; /* Adjust margin between buttons */
+  }
+
+  .filter-button:hover{
+    background-color: #3a69b7;
+  }
+
+  /* Style for ID_DECLARATION anchor tag */
+  .declar {
+    text-decoration: none;
+    color: #114388;
+    font-weight: 700;
+  }
+
+  .declar:hover{
+    text-decoration: underline;
+  }
+
+  /* Style for button in /info route */
+.retour-button {
+  background-color: #114388;
+  display: block;
+  margin: 0 auto;
+  padding: 10px 20px;
+  text-align: center;
+  color: white;
+  text-decoration: none;
+  width: 3.5rem;
+  border-radius: 0.3rem;
+}
+
+.retour-button:hover{
+  background-color: #3a69b7;
+}

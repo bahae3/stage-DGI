@@ -1,0 +1,40 @@
+{% include 'header.html' %}
+    <h1 class="setcion-title">Activités contribuables (>2)</h1>
+    <div class="container-ecart-table">
+      {% if activites|length != 0 %}
+      <table class="fl-table">
+        <thead>
+          <tr>
+            <th>ID Déclaration</th>
+            <th>ID Fiscal</th>
+            <th>Nom RS</th>
+            <th>Activité</th>
+            <th>Mois</th>
+            <th>Année</th>
+            <th>Régime</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for data in activites %}
+          <tr class="activite-row">
+            <td>{{ data["ID_DECLARATION"] }}</td>
+            <td>{{ data["ID_FISCAL"] }}</td>
+            <td>{{ data["RESEAU_SOCIAL"] }}</td>
+            <td>{{ data["ACTIVITE"] }}</td>
+            <td>{{ data["PERIODE"] }}</td>
+            <td>{{ data["ANNEE"] }}</td>
+            <td>{{ data["REGIME"] }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+    </div>
+    <div class="arrows">
+      <button class="left-arrow">⬅</button>
+      <button class="right-arrow">➡</button>
+    </div>
+
+    <script src="static/activites.js"></script>
+  </body>
+</html>

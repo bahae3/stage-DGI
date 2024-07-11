@@ -1,0 +1,21 @@
+{% include 'header.html' %}
+    <div class="container">
+      <h1>Menu SIMPL TVA:</h1>
+      <ul>
+        <li>
+          <a href="{{ url_for('ecart') }}"
+            >Ecart entre déduction facturée et déduction déclarée.</a
+          >
+        </li>
+        <li>
+          <a href="{{ url_for('activites_contribuables') }}">Activités contribuables.</a>
+        </li>
+        <li>
+          <a href="{{ url_for('comparer_credit') }}"
+            >Comparaison crédit déclaré VS crédit calculé.</a
+          >
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

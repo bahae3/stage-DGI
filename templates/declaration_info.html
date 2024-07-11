@@ -1,0 +1,29 @@
+{% include 'header.html' %}
+
+<h1 class="setcion-title">ID Declaration: {{ declar_info['ID_DECLARATION'] }}</h1>
+
+<div class="container-ecart-table">
+<table class="fl-table">
+    <thead>
+      <tr>
+        <th>ID Adhérent</th>
+        <th>Réseau Social</th>
+        <th>Année de déclaration</th>
+        <th>Période de déclaration</th>
+        <th>Régime de déclaration</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ declar_info["ID Adherent"] }}</td>
+        <td>{{ declar_info["NOM_PRENOM_RS"] }}</td>
+        <td>{{ declar_info["ANNEE_DECLAR"] }}</td>
+        <td>{{ declar_info["PERIODE_DECLAR"] }}</td>
+        <td>{{ declar_info["REGIME_DECLAR"] }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<a href="{{ url_for('comparer_credit') }}" class="retour-button">Retour</a>
+

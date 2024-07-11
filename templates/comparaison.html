@@ -1,0 +1,36 @@
+{% include 'header.html' %}
+  <h1 class="setcion-title">Comparaison crédit déclaré VS crédit calculé</h1>
+  <div class="button-container">
+    <button class="filter-button" onclick="afficherTous()">Afficher tous</button>
+    <button class="filter-button" onclick="filtrerPositif()">Ecart positif</button>
+    <button class="filter-button" onclick="filtrerNegatif()">Ecart négatif</button>
+  </div>
+  <div class="container-ecart-table">
+    {% if comparaisons|length != 0 %}
+    <table class="fl-table">
+      <thead>
+        <tr>
+          <th>ID Déclaration</th>
+          <th>ID Fiscal</th>
+          <th>Crédit déclaré (MAD)</th>
+          <th>Crédit calculé (MAD)</th>
+          <th>Ecart (difference cc - cd)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for data in comparaisons %}
+        <tr>
+          <td><a href="{{ url_for('info', id_declar=data['ID_DECLARATION']) }}" class="declar">{{ data["ID_DECLARATION"] }}</a></td>
+          <td>{{ data["ID Fiscal"] }}</td>
+          <td>{{ data["Crédit déclaré"] }}</td>
+          <td>{{ data["Crédit calculé"] }}</td>
+          <td>{{ data["Ecart"] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+  </div>
+  <script src="static/filtre_credit.js"></script>
+</body>
+</html>

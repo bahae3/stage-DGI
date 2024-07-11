@@ -1,0 +1,49 @@
+{% include 'header.html' %}
+    <h1 class="setcion-title">
+      Ecart entre déduction facturée et déduction déclarée
+    </h1>
+    <div class="container-ecart">
+      <form action="{{ url_for('ecart') }}" method="post" class="ecart-form">
+        <label class="annee-label">Année: </label>
+        <input type="number" name="annee" required />
+        <label class="annee-label">Période de dépôt: </label><br />
+        <label class="limit-label">de:</label
+        ><input
+          type="date"
+          name="fromDate"
+          class="limit-input"
+          required
+        /><br />
+        <label class="limit-label">à:</label
+        ><input type="date" name="toDate" class="limit-input" required />
+        <input type="submit" value="Chercher" />
+      </form>
+    </div>
+    <div class="container-ecart-table">
+      {% if all_data|length != 0 %}
+      <table class="fl-table">
+        <thead>
+          <tr>
+            <th>ID Déclaration</th>
+            <th>Num facture</th>
+            <th>Déduction facturée</th>
+            <th>Déduction déclarée</th>
+            <th>Ecart</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for data in all_data %}
+          <tr>
+            <td>{{ data[0] }}</td>
+            <td>{{ data[1] }}</td>
+            <td>{{ data[2] }}</td>
+            <td>{{ data[3] }}</td>
+            <td>{{ data[4] }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+    </div>
+  </body>
+</html>

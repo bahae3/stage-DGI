@@ -1,0 +1,49 @@
+* {
+  margin: 0;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  background-color: #ededed;
+}
+
+.header_left_section,
+.header_right_section {
+  width: fit-content;
+}
+
+.header_left_section {
+  height: 8rem;
+  margin-left: 4rem;
+}
+
+.header_right_section {
+  margin-right: 4.5rem;
+}
+
+.link_right {
+  margin: auto 2rem;
+  text-decoration: none;
+  font-size: 1.8rem;
+  color: #114388;
+  font-family: "PT Serif", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.link_right:hover {
+  color: #3a69b7;
+}
+
+/* Title styling of all sections */
+.setcion-title {
+  text-align: center;
+  font-family: "PT Serif", serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 2.3rem;
+  margin-top: 3rem;
+}
