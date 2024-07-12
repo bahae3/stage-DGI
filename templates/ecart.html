@@ -19,31 +19,5 @@
         <input type="submit" value="Chercher" />
       </form>
     </div>
-    <div class="container-ecart-table">
-      {% if all_data|length != 0 %}
-      <table class="fl-table">
-        <thead>
-          <tr>
-            <th>ID Déclaration</th>
-            <th>Num facture</th>
-            <th>Déduction facturée</th>
-            <th>Déduction déclarée</th>
-            <th>Ecart</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for data in all_data %}
-          <tr>
-            <td>{{ data[0] }}</td>
-            <td>{{ data[1] }}</td>
-            <td>{{ data[2] }}</td>
-            <td>{{ data[3] }}</td>
-            <td>{{ data[4] }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-      {% endif %}
-    </div>
   </body>
 </html>

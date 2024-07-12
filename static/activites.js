@@ -1,3 +1,5 @@
+//// This is for activites.html, ecart_table.html, comparaison.html
+
 var rows = document.querySelectorAll(".activite-row");
 
 if (rows.length < 10) {

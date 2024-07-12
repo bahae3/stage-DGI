@@ -19,7 +19,7 @@
       </thead>
       <tbody>
         {% for data in comparaisons %}
-        <tr>
+        <tr class="activite-row">
           <td><a href="{{ url_for('info', id_declar=data['ID_DECLARATION']) }}" class="declar">{{ data["ID_DECLARATION"] }}</a></td>
           <td>{{ data["ID Fiscal"] }}</td>
           <td>{{ data["Crédit déclaré"] }}</td>
@@ -31,6 +31,12 @@
     </table>
     {% endif %}
   </div>
+  <div class="arrows">
+    <button class="left-arrow">⬅</button>
+    <button class="right-arrow">➡</button>
+  </div>
+
+  <script src="static/activites.js"></script>
   <script src="static/filtre_credit.js"></script>
 </body>
 </html>

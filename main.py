@@ -1,17 +1,46 @@
 # Install the following packages via your terminal:
-# pip install flask flask_mysqldb
+# pip install flask flask_mysqldb flask_wtf flask_login
 
 import pprint
 from collections import Counter
 from datetime import datetime
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for, flash
+from flask_login import LoginManager, login_user, login_required, current_user, logout_user, UserMixin
 from flask_mysqldb import MySQL
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, SubmitField
+from wtforms.validators import DataRequired
 
 # creating the app
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "bahae03"
 app.app_context().push()
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# Flask login
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'admin'
+
+
+class User(UserMixin):
+    def __init__(self, id):
+        self.id = id
+
+    def get_id(self):
+        return self.id
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User(user_id)
+
+
+class LoginForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    submit = SubmitField('Se connecter')
+
 
 # connect to database
 app.config['MYSQL_HOST'] = 'localhost'
@@ -27,13 +56,31 @@ def home():
     return render_template("home.html")
 
 
-@app.route("/admin")
+@app.route("/home")
+@login_required
+def home_connected():
+    return render_template("home.html", current_user=current_user)
+
+
+@app.route("/admin", methods=['POST', 'GET'])
 def admin():
-    return render_template("admin.html")
+    form = LoginForm()
+    if form.validate_on_submit():
+        username = form.username.data
+        password = form.password.data
+        print(f"username: {username} and password: {password}")
+        if username == "bahae" and password == "123456":
+            user = User(id=1)
+            login_user(user)
+            return redirect(url_for("home_connected"))
+        else:
+            flash("Username ou password incorrect.")
+    return render_template("login.html", form=form)
 
 
 # Ecart entre déduction facturée et deduction déclarée
 @app.route("/ecart", methods=['GET', 'POST'])
+@login_required
 def ecart():
     # retrieving data from form in ecart.html
     if request.method == "POST":
@@ -69,12 +116,13 @@ def ecart():
             for j in i:
                 row_list.append(j)
             list_data.append(row_list)
-        return render_template("ecart.html", all_data=list_data)
+        return render_template("ecart_table.html", all_data=list_data)
     return render_template("ecart.html")
 
 
 # Activités contribuables
 @app.route("/activites_contribuables", methods=['GET', 'POST'])
+@login_required
 def activites_contribuables():
     if request.method == "POST":
         id_fiscal = request.form.get("if")
@@ -135,6 +183,7 @@ def activites_contribuables():
 
 # Comparaison crédit déclaré vs crédit calculé
 @app.route('/comparer_credit')
+@login_required
 def comparer_credit():
     cursor = mysql.connection.cursor()
     # This query calculates the declared credit amount and the sum of tva prorata amounts
@@ -181,6 +230,7 @@ def comparer_credit():
 
 # Info d'une declaration cliquee dans la comparaison des credits
 @app.route("/info", methods=['GET', 'POST'])
+@login_required
 def info():
     id_declar = request.args.get('id_declar')
     cursor = mysql.connection.cursor()
@@ -213,6 +263,13 @@ def info():
 
     # pprint.pprint(declar_info)
     return render_template("declaration_info.html", declar_info=declar_info)
+
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for("home"))
 
 
 # function to convert from yyyy-mm-dd to dd-mm-yyyy

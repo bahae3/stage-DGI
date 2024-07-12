@@ -32,9 +32,16 @@
         alt="DGI Logo"
         class="header_left_section"
       />
-
-      <div class="header_right_section">
-        <a href="{{ url_for('home') }}" class="link_right">Home</a>
-        <a href="{{ url_for('admin') }}" class="link_right">Admin Page</a>
-      </div>
+      {% if current_user.is_authenticated %}
+        <div class="header_right_section">
+          <a href="{{ url_for('home') }}" class="link_right">Acceuil</a>
+          <a href="{{ url_for('logout') }}" class="link_right">Se déconnecter</a>
+        </div>
+      {% else %}
+        <div class="header_right_section">
+          <a href="{{ url_for('home') }}" class="link_right">Acceuil</a>
+          <a href="{{ url_for('admin') }}" class="link_right">Se connecter</a>
+        </div>
+      {% endif %}
+      
     </header>
